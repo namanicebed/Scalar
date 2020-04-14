@@ -10,6 +10,7 @@ import {Appearance} from 'react-native';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Pallete} from './Common/Pallete';
+import {Provider as PaperProvider} from 'react-native-paper';
 
 import MainStack from './Navigation/AppNavigation';
 
@@ -39,14 +40,16 @@ class App extends Component {
     console.log(this.state.colorScheme);
     return (
       <SafeAreaProvider>
-        <NavigationContainer
-          theme={
-            this.state.colorScheme == 'light'
-              ? Pallete.lightMode
-              : Pallete.darkMode
-          }>
-          <MainStack />
-        </NavigationContainer>
+        <PaperProvider>
+          <NavigationContainer
+            theme={
+              this.state.colorScheme == 'light'
+                ? Pallete.lightMode
+                : Pallete.darkMode
+            }>
+            <MainStack />
+          </NavigationContainer>
+        </PaperProvider>
       </SafeAreaProvider>
     );
   }

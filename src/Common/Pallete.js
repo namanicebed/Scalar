@@ -2,7 +2,7 @@ export const Pallete = {
   lightMode: {
     dark: false,
     colors: {
-      primary: 'rgb(255, 45, 85)',
+      primary: '#1F1F1F',
       background: '#fafafa',
       secBackground:'#fff',
       card: 'rgb(255, 255, 255)',
@@ -14,7 +14,7 @@ export const Pallete = {
   darkMode: {
     dark: true,
     colors: {
-      primary: 'rgb(255, 45, 85)',
+      primary: '#fafafa',
       background: '#1F1F1F',
       secBackground:'#1F1F1F',
       card: 'rgb(255, 255, 255)',

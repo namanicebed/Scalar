@@ -31,16 +31,16 @@ function TabNavigation() {
           if (route.name == 'Chats') {
             iconName = focused ? 'chat-bubble' : 'chat-bubble-outline';
             return (
-              <MaterialIcons name={iconName} color={color} size={size + 2} />
+              <MaterialIcons name={'chat-bubble-outline'} color={color} size={size + 2} />
             );
           } else if (route.name == 'Meetings') {
             iconName = focused ? 'clockcircle' : 'clockcircleo';
-            return <AntDesign name={iconName} color={color} size={size - 2} />;
+            return <AntDesign name={'clockcircleo'} color={color} size={size - 2} />;
           } else if (route.name == 'Profile') {
             iconName = focused ? 'account-circle' : 'account-circle-outline';
             return (
               <MaterialCommunityIcons
-                name={iconName}
+                name={'account-circle-outline'}
                 color={color}
                 size={size + 3}
               />
@@ -50,7 +50,7 @@ function TabNavigation() {
       })}
       tabBarOptions={{
         activeTintColor: colors.tabTintColor,
-        labelStyle: {fontSize: 10, fontFamily: 'Raleway-SemiBold'},
+        labelStyle: {fontSize: 10.5, fontFamily: 'Raleway-Bold'},
         style: {
           width: Dimensions.width,
           borderTopWidth: 0,
