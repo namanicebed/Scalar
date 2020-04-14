@@ -1,11 +1,16 @@
+/**
+ * Using React @v16.11.0
+ * Using ReactNative @v0.62.2
+ * Using React-Navigation@v5.0
+ * For further details refer to package.json
+ */
 import 'react-native-gesture-handler';
 import React, {Component} from 'react';
-import {Text, View, Appearance} from 'react-native';
+import {Appearance} from 'react-native';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Pallete} from './Common/Pallete';
 
-//import Navigation Screens
 import MainStack from './Navigation/AppNavigation';
 
 class App extends Component {

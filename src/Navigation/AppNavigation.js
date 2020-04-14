@@ -1,10 +1,12 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-//Importing Screens
+/**
+ * Import Main Screens
+ */
 import LoginScreen from '../Screens/Auth';
 import SplashScreen from '../Screens/SplashScreen';
-import Tabs from '../Screens/Tabs';
+import Tabs from './TabNavigation';
 
 const Stack = createStackNavigator();
 

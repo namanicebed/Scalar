@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
-class TabsComponent extends Component {
+class ChatScreen extends Component {
   render() {
     return (
       <View
@@ -17,7 +17,7 @@ class TabsComponent extends Component {
   }
 }
 
-export default function Tabs() {
+export default function ChatTab() {
   const {colors} = useTheme();
-  return <TabsComponent colorScheme={colors} />;
+  return <ChatScreen colorScheme={colors} />;
 }
