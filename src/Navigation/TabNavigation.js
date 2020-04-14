@@ -1,5 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useTheme} from '@react-navigation/native';
 
 import Dimensions from '../Common/Dimensions';
 
@@ -20,6 +21,7 @@ import ProfileScreen from '../Screens/Tabs/Profile';
 const Tabs = createBottomTabNavigator();
 
 function TabNavigation() {
+  const {colors} = useTheme();
   return (
     <Tabs.Navigator
       screenOptions={({route}) => ({
@@ -29,25 +31,25 @@ function TabNavigation() {
           if (route.name == 'Chats') {
             iconName = focused ? 'chat-bubble' : 'chat-bubble-outline';
             return (
-              <MaterialIcons name={iconName} color={color} size={size + 3} />
+              <MaterialIcons name={iconName} color={color} size={size + 2} />
             );
           } else if (route.name == 'Meetings') {
             iconName = focused ? 'clockcircle' : 'clockcircleo';
-            return <AntDesign name={iconName} color={color} size={size - 1} />;
+            return <AntDesign name={iconName} color={color} size={size - 2} />;
           } else if (route.name == 'Profile') {
             iconName = focused ? 'account-circle' : 'account-circle-outline';
             return (
               <MaterialCommunityIcons
                 name={iconName}
                 color={color}
-                size={size + 4}
+                size={size + 3}
               />
             );
           }
         },
       })}
       tabBarOptions={{
-        activeTintColor: '#ee6f57',
+        activeTintColor: colors.tabTintColor,
         labelStyle: {fontSize: 10, fontFamily: 'Raleway-SemiBold'},
         style: {
           width: Dimensions.width,
@@ -57,7 +59,7 @@ function TabNavigation() {
           shadowOpacity: 0.1,
           elevation: 10,
           height: 90,
-          backgroundColor: '#fff',
+          backgroundColor: colors.secBackground,
         },
       }}>
       <Tabs.Screen
