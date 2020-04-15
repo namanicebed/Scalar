@@ -17,7 +17,7 @@ export const Pallete = {
     dark: true,
     colors: {
       primary: '#fafafa',
-      background: '#1F1F1F',
+      background: '#151414',
       primaryText:'#fff',
       secondaryText:'#CCCCCC',
       secondary:'#1F1F1F',

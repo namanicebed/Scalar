@@ -5,10 +5,7 @@ import Ripple from 'react-native-material-ripple';
 class ChatBar extends Component {
   render() {
     return (
-      <Ripple
-        rippleColor={this.props.colorScheme.primary}
-        activeOpacity={0.8}
-      >
+      <Ripple rippleColor={this.props.colorScheme.primary} activeOpacity={0.8}>
         <View
           style={{
             marginVertical: 10,
@@ -27,7 +24,7 @@ class ChatBar extends Component {
             <View style={{justifyContent: 'space-evenly', marginLeft: 20}}>
               <Text
                 style={{
-                  fontFamily: 'OpenSans-Bold',
+                  fontFamily: 'OpenSans-Regular',
                   fontSize: 16,
                   color: this.props.colorScheme.primaryText,
                 }}>
@@ -35,7 +32,7 @@ class ChatBar extends Component {
               </Text>
               <Text
                 style={{
-                  fontFamily: 'OpenSans-Regular',
+                  fontFamily: 'OpenSans-Light',
                   fontSize: 15,
                   color: this.props.colorScheme.secondaryText,
                   width: '100%',
@@ -49,8 +46,8 @@ class ChatBar extends Component {
             style={{justifyContent: 'space-between', flex: 0.1, height: 45}}>
             <Text
               style={{
-                fontFamily: 'OpenSans-Regular',
-                fontSize: 15,
+                fontFamily: 'OpenSans-Light',
+                fontSize: 14,
                 color: this.props.colorScheme.secondaryText,
               }}>
               now

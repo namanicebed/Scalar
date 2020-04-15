@@ -1,4 +1,5 @@
 import React from 'react';
+import {Platform} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useTheme} from '@react-navigation/native';
 
@@ -17,6 +18,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import ChatScreen from '../Screens/Tabs/Chats';
 import MeetingsScreen from '../Screens/Tabs/Meetings';
 import ProfileScreen from '../Screens/Tabs/Profile';
+import CallScreen from '../Screens/Tabs/Calls';
+
 
 const Tabs = createBottomTabNavigator();
 
@@ -31,16 +34,32 @@ function TabNavigation() {
           if (route.name == 'Chats') {
             iconName = focused ? 'chat-bubble' : 'chat-bubble-outline';
             return (
-              <MaterialIcons name={'chat-bubble-outline'} color={color} size={size + 2} />
+              <MaterialIcons
+                name={'chat-bubble-outline'}
+                color={color}
+                size={size + 2}
+              />
             );
           } else if (route.name == 'Meetings') {
             iconName = focused ? 'clockcircle' : 'clockcircleo';
-            return <AntDesign name={'clockcircleo'} color={color} size={size - 2} />;
+            return (
+              <AntDesign name={'clockcircleo'} color={color} size={size - 2} />
+            );
           } else if (route.name == 'Profile') {
             iconName = focused ? 'account-circle' : 'account-circle-outline';
             return (
               <MaterialCommunityIcons
                 name={'account-circle-outline'}
+                color={color}
+                size={size + 3}
+              />
+            );
+          }
+          else if (route.name == 'Calls') {
+            iconName = focused ? 'account-circle' : 'account-circle-outline';
+            return (
+              <MaterialIcons
+                name={'call'}
                 color={color}
                 size={size + 3}
               />
@@ -58,7 +77,7 @@ function TabNavigation() {
           shadowOffset: {height: -1, width: 0},
           shadowOpacity: 0.1,
           elevation: 10,
-          height: 90,
+          height: Platform.OS === 'android' ? 58 : 90,
           backgroundColor: colors.secondary,
         },
       }}>
@@ -66,6 +85,11 @@ function TabNavigation() {
         name="Chats"
         component={ChatScreen}
         options={{title: 'CHATS'}}
+      />
+      <Tabs.Screen
+        name="Calls"
+        component={CallScreen}
+        options={{title: 'CALLS'}}
       />
       <Tabs.Screen
         name="Meetings"
