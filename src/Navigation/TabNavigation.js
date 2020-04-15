@@ -59,7 +59,7 @@ function TabNavigation() {
           shadowOpacity: 0.1,
           elevation: 10,
           height: 90,
-          backgroundColor: colors.secBackground,
+          backgroundColor: colors.secondary,
         },
       }}>
       <Tabs.Screen
