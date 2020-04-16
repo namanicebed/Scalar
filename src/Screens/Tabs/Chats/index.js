@@ -10,7 +10,14 @@ class ChatScreen extends Component {
   render() {
     return (
       <SafeAreaView style={{flex: 1}}>
-      <StatusBar backgroundColor={this.props.colorScheme.background}  />
+        <StatusBar
+          backgroundColor={this.props.colorScheme.background}
+          barStyle={
+            this.props.colorScheme.background == '#151414'
+              ? 'light-content'
+              : 'dark-content'
+          }
+        />
         <View style={{marginTop: 10}}>
           <View style={{marginHorizontal: 20}}>
             <View
@@ -31,7 +38,7 @@ class ChatScreen extends Component {
               <Feather
                 name="edit"
                 size={24}
-                onPress={() => this.props.navigation.navigate("NewChat")}
+                onPress={() => this.props.navigation.navigate('NewChat')}
                 color={this.props.colorScheme.primary}
               />
             </View>
@@ -48,6 +55,6 @@ class ChatScreen extends Component {
 
 export default function ChatTab(props) {
   const {colors} = useTheme();
-  const {navigation} = props
-  return <ChatScreen colorScheme={colors} navigation={navigation}/>;
+  const {navigation} = props;
+  return <ChatScreen colorScheme={colors} navigation={navigation} />;
 }
