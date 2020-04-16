@@ -4,7 +4,7 @@ import {useTheme} from '@react-navigation/native';
 import SafeAreaView from 'react-native-safe-area-view';
 import SearchBar from '../../../Components/SearchBar';
 import ChatBar from '../../../Components/ChatBar';
-import Entypo from 'react-native-vector-icons/Entypo';
+import Feather from 'react-native-vector-icons/Feather';
 
 class ChatScreen extends Component {
   render() {
@@ -28,8 +28,8 @@ class ChatScreen extends Component {
                 }}>
                 Messages
               </Text>
-              <Entypo
-                name="new-message"
+              <Feather
+                name="edit"
                 size={24}
                 onPress={() => this.props.navigation.navigate("NewChat")}
                 color={this.props.colorScheme.primary}

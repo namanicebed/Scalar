@@ -10,8 +10,8 @@ export default class SearchBar extends Component {
           marginTop: 20,
           alignSelf: 'center',
           width: '100%',
-          borderRadius: 7,
-          height: 48,
+          borderRadius: 5,
+          height: 45,
           backgroundColor: '#e3e3e3',
           elevation: 3,
           shadowRadius: 0,
@@ -22,7 +22,7 @@ export default class SearchBar extends Component {
           fontFamily: 'OpenSans-Regular',
           fontSize: 17,
         }}
-        selectionColor={this.props.colorScheme.tabTintColor}
+        selectionColor='grey'
       />
     );
   }

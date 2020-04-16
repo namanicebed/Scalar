@@ -43,7 +43,7 @@ class ChatBar extends Component {
             </View>
           </View>
           <View
-            style={{justifyContent: 'space-between', flex: 0.1, height: 45}}>
+            style={{justifyContent: 'space-between', flex: 0.1, height: 43}}>
             <Text
               style={{
                 fontFamily: 'OpenSans-Light',
