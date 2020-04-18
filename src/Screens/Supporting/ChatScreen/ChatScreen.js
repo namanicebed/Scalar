@@ -4,10 +4,16 @@ import {GiftedChat} from 'react-native-gifted-chat';
 import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import Ripple from 'react-native-material-ripple';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import SafeAreaView from 'react-native-safe-area-view';
+import {useTheme} from '@react-navigation/native';
+import Avatar from '../NewChat/components/Avatar';
+import {Menu} from 'react-native-paper';
 
-class Example extends React.Component {
+class ChatScreenComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,24 +59,87 @@ class Example extends React.Component {
         _id: 1,
         text: '',
         createdAt: new Date(),
-        user:{
-            _id:1
-        }
+        user: {
+          _id: 1,
+        },
       },
     });
   }
   render() {
     return (
-      <GiftedChat
-        messages={this.state.messages}
-        renderComposer={() => <View style={{minHeight: 56}}></View>}
-        renderInputToolbar={this._renderInputToolbar}
-        // onSend={this.onSend}
-        bottomOffset={25}
-        user={{
-          _id: 1,
-        }}
-      />
+      <SafeAreaView style={{flex: 1}}>
+        <View
+          style={{
+            width: '100%',
+            height: 56,
+            backgroundColor: this.props.colorScheme.secondary,
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            alignItems: 'center',
+            shadowColor: '#000',
+            shadowOffset: {height: 1, width: 0},
+            shadowOpacity: 0.1,
+            shadowRadius: 1,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginLeft: 10,
+            }}>
+            <MaterialIcon
+              name="arrow-back"
+              color={this.props.colorScheme.primary}
+              size={26}
+              onPress={() => this.props.navigation.pop()}
+            />
+            <Avatar name={'Naman Singh'} topBar />
+            <View style={{justifyContent: 'space-evenly'}}>
+              <Text
+                style={{
+                  color: this.props.colorScheme.primaryText,
+                  fontFamily: 'OpenSans-Bold',
+                  fontSize: 15,
+                }}>
+                Naman Singh
+              </Text>
+              <Text
+                style={{
+                  color: 'grey',
+                  fontFamily: 'OpenSans-regular',
+                  fontSize: 13.5,
+                }}>
+                online 2 hours ago
+              </Text>
+            </View>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <Ionicons name="ios-videocam" size={23} color={'#fff'} />
+            <MaterialIcon
+              name="local-phone"
+              size={22}
+              color={'#fff'}
+              style={{marginHorizontal: 23}}
+            />
+            <MaterialCommIcons
+              name="dots-vertical"
+              size={25}
+              color={'#fff'}
+              style={{marginRight: 10}}
+            />
+          </View>
+        </View>
+        <GiftedChat
+          messages={this.state.messages}
+          renderComposer={() => <View style={{minHeight: 56}}></View>}
+          renderInputToolbar={this._renderInputToolbar}
+          // onSend={this.onSend}
+          bottomOffset={25}
+          user={{
+            _id: 1,
+          }}
+        />
+      </SafeAreaView>
     );
   }
 
@@ -196,49 +265,9 @@ class Example extends React.Component {
   };
 }
 
-export default Example;
-
-// import {GiftedChat} from 'react-native-gifted-chat';
-// import React from 'react';
-// export default class Example extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {messages: []};
-//     this.onSend = this.onSend.bind(this);
-//   }
-//   componentWillMount() {
-//     this.setState({
-//       messages: [
-//         {
-//           _id: 1,
-//           text: 'Hello developer',
-//           createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
-//           user: {
-//             _id: 2,
-//             name: 'React Native',
-//             avatar: 'https://facebook.github.io/react/img/logo_og.png',
-//           },
-//         },
-//       ],
-//     });
-//   }
-//   onSend(messages = []) {
-//       console.log(messages);
-//     this.setState((previousState) => {
-//       return {
-//         messages: GiftedChat.append(previousState.messages, messages),
-//       };
-//     });
-//   }
-//   render() {
-//     return (
-//       <GiftedChat
-//         messages={this.state.messages}
-//         onSend={this.onSend}
-//         user={{
-//           _id: 1,
-//         }}
-//       />
-//     );
-//   }
-// }
+export default function ChatScreen(props) {
+  const {colors} = useTheme();
+  return (
+    <ChatScreenComponent colorScheme={colors} navigation={props.navigation} />
+  );
+}
