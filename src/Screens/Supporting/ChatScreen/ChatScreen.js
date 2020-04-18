@@ -98,7 +98,7 @@ class ChatScreenComponent extends React.Component {
               <Text
                 style={{
                   color: this.props.colorScheme.primaryText,
-                  fontFamily: 'OpenSans-Bold',
+                  fontFamily: 'OpenSans-Regular',
                   fontSize: 15,
                 }}>
                 Naman Singh
@@ -114,17 +114,21 @@ class ChatScreenComponent extends React.Component {
             </View>
           </View>
           <View style={{flexDirection: 'row'}}>
-            <Ionicons name="ios-videocam" size={23} color={'#fff'} />
+            <Ionicons
+              name="ios-videocam"
+              size={24.5}
+              color={this.props.colorScheme.primary}
+            />
             <MaterialIcon
               name="local-phone"
               size={22}
-              color={'#fff'}
+              color={this.props.colorScheme.primary}
               style={{marginHorizontal: 23}}
             />
             <MaterialCommIcons
               name="dots-vertical"
               size={25}
-              color={'#fff'}
+              color={this.props.colorScheme.primary}
               style={{marginRight: 10}}
             />
           </View>
@@ -149,8 +153,16 @@ class ChatScreenComponent extends React.Component {
         style={{
           minHeight: 50,
           width: '90%',
-          backgroundColor: '#2B2B2B',
+          //   backgroundColor: '#2B2B2B',
+          backgroundColor:
+            this.props.colorScheme.background == '#fafafa'
+              ? '#fafafa'
+              : '#2B2B2B',
           alignSelf: 'center',
+          shadowColor: '#000',
+          shadowOffset: {height: 0, width: 0},
+          shadowRadius: 3,
+          shadowOpacity: 0.1,
           alignItems: 'center',
           justifyContent: 'space-between',
           borderRadius: 50 / 2,
