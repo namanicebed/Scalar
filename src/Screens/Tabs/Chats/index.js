@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, StatusBar} from 'react-native';
+import {Text, View, StatusBar, BackHandler} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import SafeAreaView from 'react-native-safe-area-view';
 import SearchBar from '../../../Components/SearchBar';
@@ -30,14 +30,14 @@ class ChatScreen extends Component {
               <Text
                 style={{
                   fontFamily: 'Raleway-SemiBold',
-                  fontSize: 30,
+                  fontSize: 27,
                   color: this.props.colorScheme.primary,
                 }}>
-                Messages
+                Chats
               </Text>
               <Feather
                 name="edit"
-                size={24}
+                size={23}
                 onPress={() => this.props.navigation.navigate('NewChat')}
                 color={this.props.colorScheme.primary}
               />
@@ -45,8 +45,14 @@ class ChatScreen extends Component {
             <SearchBar colorScheme={this.props.colorScheme} />
           </View>
           <View style={{marginTop: 20}} />
-          <ChatBar colorScheme={this.props.colorScheme} />
-          <ChatBar colorScheme={this.props.colorScheme} />
+          <ChatBar
+            colorScheme={this.props.colorScheme}
+            navigation={this.props.navigation}
+          />
+          <ChatBar
+            colorScheme={this.props.colorScheme}
+            navigation={this.props.navigation}
+          />
         </View>
       </SafeAreaView>
     );

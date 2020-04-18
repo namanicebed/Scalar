@@ -5,7 +5,10 @@ import Ripple from 'react-native-material-ripple';
 class ChatBar extends Component {
   render() {
     return (
-      <Ripple rippleColor={this.props.colorScheme.primary} activeOpacity={0.8}>
+      <Ripple
+        rippleColor={this.props.colorScheme.primary}
+        activeOpacity={0.8}
+        onPress={() => this.props.navigation.navigate('ChatScreen')}>
         <View
           style={{
             marginVertical: 10,

@@ -27,7 +27,13 @@ class NewChat extends Component {
   }
 
   componentDidMount() {
-    Platform.OS == 'android' ? this.requestContactPermission() : null;
+    const {navigation} = this.props;
+    navigation.addListener('willFocus', () => {
+      // this.props.getMyReservations();
+    });
+    Platform.OS == 'android'
+      ? this.requestContactPermission()
+      : this._getContacts();
   }
   requestContactPermission = async () => {
     try {
@@ -58,10 +64,13 @@ class NewChat extends Component {
         console.log(denied);
       } else {
         // contacts returned in Array
-        // console.log(contacts);
+        console.log(contacts);
         contacts.forEach((contact) => {
           const contactObj = {
-            name: contact.displayName,
+            name:
+              Platform.OS == 'android'
+                ? contact.displayName
+                : `${contact.givenName} ${contact.familyName}`,
             number: _.isEmpty(contact.phoneNumbers)
               ? null
               : contact.phoneNumbers[0].number,

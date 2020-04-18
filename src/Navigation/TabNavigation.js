@@ -86,11 +86,7 @@ function TabNavigation() {
         component={ChatScreen}
         options={{title: 'CHATS'}}
       />
-      <Tabs.Screen
-        name="Calls"
-        component={CallScreen}
-        options={{title: 'CALLS'}}
-      />
+     
       <Tabs.Screen
         name="Meetings"
         component={MeetingsScreen}
