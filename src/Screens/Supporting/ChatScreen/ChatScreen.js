@@ -152,7 +152,7 @@ class ChatScreenComponent extends React.Component {
       <View
         style={{
           minHeight: 50,
-          width: '90%',
+          width: '93%',
           //   backgroundColor: '#2B2B2B',
           backgroundColor:
             this.props.colorScheme.background == '#fafafa'
