@@ -10,6 +10,7 @@ class TopBar extends Component {
         style={{
           width: '100%',
           height: 56,
+          elevation:3,
           backgroundColor: this.props.colorScheme.secondary,
           justifyContent: 'space-around',
           flexDirection: 'row',

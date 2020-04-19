@@ -7,24 +7,20 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
 } from 'react-native';
-import {GiftedChat} from 'react-native-gifted-chat';
-import Feather from 'react-native-vector-icons/Feather';
-import Entypo from 'react-native-vector-icons/Entypo';
-import MaterialCommIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import LinearGradient from 'react-native-linear-gradient';
-import Ripple from 'react-native-material-ripple';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import {GiftedChat, Bubble} from 'react-native-gifted-chat';
 import SafeAreaView from 'react-native-safe-area-view';
 import {useTheme} from '@react-navigation/native';
+import TopBar from './components/TopBar';
+import InputToolbar from './components/InputToolBar';
+import {color} from 'react-native-reanimated';
 import Avatar from '../NewChat/components/Avatar';
-import {Menu} from 'react-native-paper';
 
 class ChatScreenComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       messages: [],
+      menuVisible: false,
       newMessageBody: {
         _id: 1,
         text: '',
@@ -41,7 +37,8 @@ class ChatScreenComponent extends React.Component {
       messages: [
         {
           _id: 1,
-          text: 'Hello developer',
+          text:
+            'Hello developer this i akdjfkl jalksdjf lkja djfkj ajklsdf jalksdj f',
           createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
           user: {
             _id: 2,
@@ -75,76 +72,43 @@ class ChatScreenComponent extends React.Component {
   render() {
     return (
       <SafeAreaView style={{flex: 1}}>
-        <View
-          style={{
-            width: '100%',
-            height: 56,
-            backgroundColor: this.props.colorScheme.secondary,
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            alignItems: 'center',
-            shadowColor: '#000',
-            shadowOffset: {height: 1, width: 0},
-            shadowOpacity: 0.1,
-            shadowRadius: 1,
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginLeft: 10,
-            }}>
-            <MaterialIcon
-              name="arrow-back"
-              color={this.props.colorScheme.primary}
-              size={26}
-              onPress={() => this.props.navigation.pop()}
-            />
-            <Avatar name={'Naman Singh'} topBar />
-            <View style={{justifyContent: 'space-evenly'}}>
-              <Text
-                style={{
-                  color: this.props.colorScheme.primaryText,
-                  fontFamily: 'OpenSans-Regular',
-                  fontSize: 15,
-                }}>
-                Naman Singh
-              </Text>
-              <Text
-                style={{
-                  color: 'grey',
-                  fontFamily: 'OpenSans-regular',
-                  fontSize: 13.5,
-                }}>
-                online 2 hours ago
-              </Text>
-            </View>
-          </View>
-          <View style={{flexDirection: 'row'}}>
-            <Ionicons
-              name="ios-videocam"
-              size={24.5}
-              color={this.props.colorScheme.primary}
-            />
-            <MaterialIcon
-              name="local-phone"
-              size={22}
-              color={this.props.colorScheme.primary}
-              style={{marginHorizontal: 23}}
-            />
-            <MaterialCommIcons
-              name="dots-vertical"
-              size={25}
-              color={this.props.colorScheme.primary}
-              style={{marginRight: 10}}
-            />
-          </View>
-        </View>
+        <TopBar
+          colorScheme={this.props.colorScheme}
+          navigation={this.props.navigation}
+        />
         <View style={{marginBottom: 15, flex: 1}}>
           <GiftedChat
             messages={this.state.messages}
             renderComposer={() => <View style={{minHeight: 56}}></View>}
-            renderInputToolbar={this._renderInputToolbar}
+            renderAvatar={() => <Avatar name="Naman Singh" topBar />}
+            renderBubble={(props) => (
+              <Bubble
+                {...props}
+                wrapperStyle={{
+                  left: {
+                    backgroundColor: this.props.colorScheme.bubbleBackground,
+                  },
+                  right: {
+                    backgroundColor: this.props.colorScheme.tabTintColor,
+                  },
+                }}
+                textStyle={{
+                  left: {
+                    color: this.props.colorScheme.primary,
+                  },
+                }}
+              />
+            )}
+            renderInputToolbar={() => (
+              <InputToolbar
+                newMessageBody={this.state.newMessageBody}
+                colorScheme={this.props.colorScheme}
+                setChatState={(newMessageBody) => {
+                  this.setState({newMessageBody});
+                }}
+                onSend={this.onSend}
+              />
+            )}
             user={{
               _id: 1,
             }}
@@ -153,103 +117,6 @@ class ChatScreenComponent extends React.Component {
       </SafeAreaView>
     );
   }
-
-  _renderInputToolbar = () => {
-    return (
-      <View
-        style={{
-          minHeight: 50,
-          width: '93%',
-          //   backgroundColor: '#2B2B2B',
-          backgroundColor:
-            this.props.colorScheme.background == '#fafafa'
-              ? '#fafafa'
-              : '#2B2B2B',
-          alignSelf: 'center',
-          shadowColor: '#000',
-          shadowOffset: {height: 0, width: 0},
-          shadowRadius: 3,
-          shadowOpacity: 0.1,
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderRadius: 50 / 2,
-          flexDirection: 'row',
-        }}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Entypo
-            name="emoji-happy"
-            color="#CCCCCC"
-            style={{marginLeft: 10}}
-            size={22}
-          />
-          <TextInput
-            style={{
-              height: '100%',
-              width: '70%',
-              marginLeft: 10,
-              fontSize: 17,
-              color: '#ccc',
-            }}
-            placeholder="Type your message.."
-            value={this.state.newMessageBody.text}
-            placeholderTextColor={'grey'}
-            onChangeText={(text) =>
-              this.setState({
-                newMessageBody: {
-                  _id: 2,
-                  text: text,
-                  user: {
-                    _id: 1,
-                  },
-                  createdAt: new Date(),
-                },
-              })
-            }
-          />
-        </View>
-        {this.state.newMessageBody.text == '' ? (
-          <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: 40,
-                width: 40,
-                borderRadius: 40 / 2,
-              }}>
-              <Feather name="camera" color={'#fff'} size={25} />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: 40,
-                width: 40,
-                marginRight:10,
-                borderRadius: 40 / 2,
-              }}>
-              <Feather name="image" color={'#fff'} size={25} />
-            </TouchableOpacity>
-          </View>
-        ) : (
-            <TouchableOpacity
-              onPress={this.onSend}
-              activeOpacity={0.4}
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: 40,
-                width: 40,
-                marginRight:10,
-                borderRadius: 45 / 2,
-              }}>
-              <MaterialCommIcons name="send" color="#fff" size={26} />
-            </TouchableOpacity>
-        )}
-      </View>
-    );
-  };
 }
 
 export default function ChatScreen(props) {

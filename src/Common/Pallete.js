@@ -11,6 +11,7 @@ export const Pallete = {
       card: 'rgb(255, 255, 255)',
       text: 'rgb(28, 28, 30)',
       border: 'rgb(199, 199, 204)',
+      bubbleBackground:'#e1e1e1',
       tabTintColor:'#ee6f57'
     },
   },
@@ -26,6 +27,7 @@ export const Pallete = {
       card: 'rgb(255, 255, 255)',
       text: 'rgb(28, 28, 30)',
       border: 'rgb(199, 199, 204)',
+      bubbleBackground:'#454545',
       tabTintColor:'#007EF4'
     },
   },
