@@ -1,5 +1,12 @@
 import React from 'react';
-import {Text, View, TextInput} from 'react-native';
+import {
+  Text,
+  View,
+  TextInput,
+  Platform,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+} from 'react-native';
 import {GiftedChat} from 'react-native-gifted-chat';
 import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -133,16 +140,16 @@ class ChatScreenComponent extends React.Component {
             />
           </View>
         </View>
-        <GiftedChat
-          messages={this.state.messages}
-          renderComposer={() => <View style={{minHeight: 56}}></View>}
-          renderInputToolbar={this._renderInputToolbar}
-          // onSend={this.onSend}
-          bottomOffset={25}
-          user={{
-            _id: 1,
-          }}
-        />
+        <View style={{marginBottom: 15, flex: 1}}>
+          <GiftedChat
+            messages={this.state.messages}
+            renderComposer={() => <View style={{minHeight: 56}}></View>}
+            renderInputToolbar={this._renderInputToolbar}
+            user={{
+              _id: 1,
+            }}
+          />
+        </View>
       </SafeAreaView>
     );
   }
@@ -168,109 +175,77 @@ class ChatScreenComponent extends React.Component {
           borderRadius: 50 / 2,
           flexDirection: 'row',
         }}>
-        <Entypo
-          name="emoji-happy"
-          color="#CCCCCC"
-          style={{marginLeft: 10}}
-          size={22}
-        />
-        <TextInput
-          style={{height: '100%', width: '60%', marginLeft: 5, fontSize: 17}}
-          placeholder="Type your message.."
-          value={this.state.newMessageBody.text}
-          onChangeText={(text) =>
-            this.setState({
-              newMessageBody: {
-                _id: 2,
-                text: text,
-                user: {
-                  _id: 1,
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Entypo
+            name="emoji-happy"
+            color="#CCCCCC"
+            style={{marginLeft: 10}}
+            size={22}
+          />
+          <TextInput
+            style={{
+              height: '100%',
+              width: '70%',
+              marginLeft: 10,
+              fontSize: 17,
+              color: '#ccc',
+            }}
+            placeholder="Type your message.."
+            value={this.state.newMessageBody.text}
+            placeholderTextColor={'grey'}
+            onChangeText={(text) =>
+              this.setState({
+                newMessageBody: {
+                  _id: 2,
+                  text: text,
+                  user: {
+                    _id: 1,
+                  },
+                  createdAt: new Date(),
                 },
-                createdAt: new Date(),
-              },
-            })
-          }
-        />
+              })
+            }
+          />
+        </View>
         {this.state.newMessageBody.text == '' ? (
           <View style={{flexDirection: 'row'}}>
-            <LinearGradient
-              colors={['#007EF4', '#2A75BC']}
+            <TouchableOpacity
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: '#007EF4',
                 height: 40,
                 width: 40,
-                marginRight: 6,
                 borderRadius: 40 / 2,
               }}>
-              <Ripple
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: '#007EF4',
-                  height: 40,
-                  width: 40,
-                  borderRadius: 40 / 2,
-                }}>
-                <Feather name="camera" color={'#fff'} size={22} />
-              </Ripple>
-            </LinearGradient>
-            <LinearGradient
-              colors={['#007EF4', '#2A75BC']}
+              <Feather name="camera" color={'#fff'} size={25} />
+            </TouchableOpacity>
+
+            <TouchableOpacity
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: '#007EF4',
                 height: 40,
                 width: 40,
-                marginRight: 5,
+                marginRight:10,
                 borderRadius: 40 / 2,
               }}>
-              <Ripple
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: '#007EF4',
-                  height: 40,
-                  width: 40,
-                  borderRadius: 40 / 2,
-                }}>
-                <Feather name="image" color={'#fff'} size={22} />
-              </Ripple>
-            </LinearGradient>
+              <Feather name="image" color={'#fff'} size={25} />
+            </TouchableOpacity>
           </View>
         ) : (
-          <LinearGradient
-            colors={['#007EF4', '#2A75BC']}
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: '#007EF4',
-              height: 40,
-              width: 40,
-              marginRight: 5,
-              borderRadius: 40 / 2,
-            }}>
-            <Ripple
+            <TouchableOpacity
               onPress={this.onSend}
+              activeOpacity={0.4}
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: '#007EF4',
                 height: 40,
                 width: 40,
-                marginRight: 5,
-                borderRadius: 40 / 2,
+                marginRight:10,
+                borderRadius: 45 / 2,
               }}>
-              <MaterialCommIcons
-                name="send"
-                color="#fff"
-                size={20}
-                style={{marginLeft: 10}}
-              />
-            </Ripple>
-          </LinearGradient>
+              <MaterialCommIcons name="send" color="#fff" size={26} />
+            </TouchableOpacity>
         )}
       </View>
     );
