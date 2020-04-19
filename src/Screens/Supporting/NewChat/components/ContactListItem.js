@@ -1,11 +1,17 @@
 import React from 'react';
 import Avatar from './Avatar';
 import {Text, View} from 'react-native';
-import Ripple from 'react-native-material-ripple';
+import {TouchableRipple} from 'react-native-paper';
 
 export default function Item({title, phone, colorScheme}) {
   return (
-    <Ripple rippleColor={colorScheme.primary} activeOpacity={0.8}>
+    <TouchableRipple
+      rippleColor={
+        colorScheme.primary == '#fafafa'
+          ? 'rgba(255, 255, 255, .22)'
+          : 'rgba(0, 0, 0, .2)'
+      }
+      onPress={() => null}>
       <View
         style={{
           // backgroundColor: '#f9c2ff',
@@ -33,6 +39,6 @@ export default function Item({title, phone, colorScheme}) {
           </Text>
         </View>
       </View>
-    </Ripple>
+    </TouchableRipple>
   );
 }

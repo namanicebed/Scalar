@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
 import {Text, View} from 'react-native';
 import ProfileImageContainer from './ProfileImageContainer';
-import Ripple from 'react-native-material-ripple';
+import {TouchableRipple} from 'react-native-paper';
 class ChatBar extends Component {
   render() {
     return (
-      <Ripple
-        rippleColor={this.props.colorScheme.primary}
-        activeOpacity={0.8}
+      <TouchableRipple
+        // rippleColor={this.props.colorScheme.primary}
+        rippleColor={
+          this.props.colorScheme.primary == '#fafafa'
+            ? 'rgba(255, 255, 255, .2)'
+            : 'rgba(0, 0, 0, .2)'
+        }
+        // activeOpacity={0.8}
         onPress={() => this.props.navigation.navigate('ChatScreen')}>
         <View
           style={{
@@ -59,7 +64,7 @@ class ChatBar extends Component {
           </View>
           <View style={{width: 20}} />
         </View>
-      </Ripple>
+      </TouchableRipple>
     );
   }
 }
