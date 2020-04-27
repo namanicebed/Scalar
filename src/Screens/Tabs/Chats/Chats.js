@@ -5,8 +5,12 @@ import SafeAreaView from 'react-native-safe-area-view';
 import SearchBar from '../../../Components/SearchBar';
 import ChatBar from '../../../Components/ChatBar';
 import Feather from 'react-native-vector-icons/Feather';
+import {socket} from '../../../Utils/SocketConfig';
 
 class ChatScreen extends Component {
+  componentDidMount() {
+    // socket.on('')
+  }
   render() {
     return (
       <SafeAreaView style={{flex: 1}}>
@@ -48,10 +52,12 @@ class ChatScreen extends Component {
           <ChatBar
             colorScheme={this.props.colorScheme}
             navigation={this.props.navigation}
+            _id={'1234500adfafdf'}
           />
           <ChatBar
             colorScheme={this.props.colorScheme}
             navigation={this.props.navigation}
+            _id={'445dddggggdadcee'}
           />
         </View>
       </SafeAreaView>

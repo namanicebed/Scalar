@@ -2,7 +2,16 @@ import React, {Component} from 'react';
 import {Text, View} from 'react-native';
 import ProfileImageContainer from './ProfileImageContainer';
 import {TouchableRipple} from 'react-native-paper';
+
+
 class ChatBar extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+       
+    }
+  }
+  
   render() {
     return (
       <TouchableRipple
@@ -13,7 +22,11 @@ class ChatBar extends Component {
             : 'rgba(0, 0, 0, .2)'
         }
         // activeOpacity={0.8}
-        onPress={() => this.props.navigation.navigate('ChatScreen')}>
+        onPress={() =>
+          this.props.navigation.navigate('ChatScreen', {
+            _id: this.props._id,
+          })
+        }>
         <View
           style={{
             marginVertical: 10,

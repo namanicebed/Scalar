@@ -11,7 +11,7 @@ class ToolBar extends Component {
         style={{
           minHeight: 50,
           width: '93%',
-            elevation:3,
+          elevation: 3,
           backgroundColor:
             this.props.colorScheme.background == '#fafafa'
               ? '#fafafa'
@@ -48,8 +48,9 @@ class ToolBar extends Component {
               var newMessageBody = {
                 _id: 2,
                 text: text,
+                to:this.props.sendTo,
                 user: {
-                  _id: 1,
+                  _id: this.props._id,
                 },
                 createdAt: new Date(),
               };

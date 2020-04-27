@@ -14,6 +14,7 @@ import TopBar from './components/TopBar';
 import InputToolbar from './components/InputToolBar';
 import {color} from 'react-native-reanimated';
 import Avatar from '../NewChat/components/Avatar';
+import {socket} from '../../../Utils/SocketConfig';
 
 class ChatScreenComponent extends React.Component {
   constructor(props) {
@@ -21,32 +22,21 @@ class ChatScreenComponent extends React.Component {
     this.state = {
       messages: [],
       menuVisible: false,
-      newMessageBody: {
-        _id: 1,
-        text: '',
-        user: {
-          _id: 1,
-        },
-        createdAt: new Date(),
-      },
+      newMessageBody: {text: ''},
+      isTyping:true
     };
     this.onSend = this.onSend.bind(this);
   }
-  componentWillMount() {
-    this.setState({
-      messages: [
-        {
-          _id: 1,
-          text:
-            'Hello developer this i akdjfkl jalksdjf lkja djfkj ajklsdf jalksdj f',
-          createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar: 'https://facebook.github.io/react/img/logo_og.png',
-          },
-        },
-      ],
+  componentDidMount() {
+    socket.on('new message', (data) => {
+      if (data.user._id == this.props.route.params._id) {
+        this.setState((previousState) => {
+          return {
+            messages: GiftedChat.append(previousState.messages, data),
+          };
+        });
+      }
+     
     });
   }
   onSend() {
@@ -58,16 +48,8 @@ class ChatScreenComponent extends React.Component {
         ),
       };
     });
-    this.setState({
-      newMessageBody: {
-        _id: 1,
-        text: '',
-        createdAt: new Date(),
-        user: {
-          _id: 1,
-        },
-      },
-    });
+    socket.emit('new message', this.state.newMessageBody);
+    this.setState({newMessageBody: {text: ''}});
   }
   render() {
     return (
@@ -80,7 +62,7 @@ class ChatScreenComponent extends React.Component {
           <GiftedChat
             messages={this.state.messages}
             renderComposer={() => <View style={{minHeight: 56}}></View>}
-            renderAvatar={() => <Avatar name="Naman Singh" topBar />}
+            // renderAvatar={() => <Avatar name="Naman Singh" topBar />}
             renderBubble={(props) => (
               <Bubble
                 {...props}
@@ -102,6 +84,8 @@ class ChatScreenComponent extends React.Component {
             renderInputToolbar={() => (
               <InputToolbar
                 newMessageBody={this.state.newMessageBody}
+                _id={'445dddggggdadcee'}
+                sendTo={this.props.route.params._id}
                 colorScheme={this.props.colorScheme}
                 setChatState={(newMessageBody) => {
                   this.setState({newMessageBody});
@@ -110,8 +94,10 @@ class ChatScreenComponent extends React.Component {
               />
             )}
             user={{
-              _id: 1,
+              _id: '445dddggggdadcee',
             }}
+            scrollToBottom
+            isTyping={this.state.isTyping}
           />
         </View>
       </SafeAreaView>
@@ -122,6 +108,10 @@ class ChatScreenComponent extends React.Component {
 export default function ChatScreen(props) {
   const {colors} = useTheme();
   return (
-    <ChatScreenComponent colorScheme={colors} navigation={props.navigation} />
+    <ChatScreenComponent
+      colorScheme={colors}
+      navigation={props.navigation}
+      route={props.route}
+    />
   );
 }

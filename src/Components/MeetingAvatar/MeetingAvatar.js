@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View,TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -19,28 +19,30 @@ function MeetingAvatar(props) {
   }
 
   return (
-    <View style={{alignItems: 'center', justifyContent: 'center'}}>
-      <LinearGradient
-        colors={props.colors}
-        style={{
-          height: 58,
-          width: 58,
-          borderRadius: 58/2,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Icon name={name} size={30} color="#fff" />
-      </LinearGradient>
-      <Text
-        style={{
-          fontSize: 12,
-          color: props.colorScheme.primary,
-          marginTop: 10,
-          fontWeight:'bold'
-        }}>
-        {props.title}
-      </Text>
-    </View>
+    <TouchableOpacity activeOpacity={0.5}>
+      <View style={{alignItems:'center'}}>
+        <LinearGradient
+          colors={props.colors}
+          style={{
+            height: 58,
+            width: 58,
+            borderRadius: 58 / 2,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Icon name={name} size={30} color="#fff" />
+        </LinearGradient>
+        <Text
+          style={{
+            fontSize: 12,
+            color: props.colorScheme.primary,
+            marginTop: 10,
+            fontWeight: 'bold',
+          }}>
+          {props.title}
+        </Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 export default MeetingAvatar;
